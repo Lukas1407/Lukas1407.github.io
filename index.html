@@ -72,6 +72,36 @@
             font-size: 20px;
             margin-top: 20px;
         }
+        .input-section {
+            display: none;
+            margin-top: 20px;
+        }
+        .input-section label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .input-section input[type="text"] {
+            width: 95%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .input-section button {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            color: white;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .input-section button:hover {
+            background-color: #218838;
+        }
         @media (max-width: 600px) {
             .quiz-container h1 {
                 font-size: 20px;
@@ -82,25 +112,45 @@
             }
         }
     </style>
+    <!-- Include the EmailJS SDK -->
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+    (function(){
+            emailjs.init('f-Qk1cOwYJwP2f_6S'); // Replace with your EmailJS Public Key
+        })();
+    </script>
 </head>
 <body>
-    <div class="header">Fußball Quiz für Linus</div>
+    <div class="header">Fußball Quiz für Linus </div>
     <div class="quiz-container">
         <h1>Wer ist Dobels bester Fußballer?</h1>
-        <button onclick="checkAnswer('correct', this)"> Linus &#128150;</button>
-        <button onclick="checkAnswer('wrong', this)">Daniel Rabe</button>
-        <button onclick="checkAnswer('wrong', this)">Marvin Sommer</button>
-        <button onclick="checkAnswer('wrong', this)">Kleiner Sören</button>
-        <button onclick="checkAnswer('wrong', this)">Maxim</button>
+        <button class="answer-btn" onclick="checkAnswer('correct', this)">Linus &#128150;</button>
+        <button class="answer-btn" onclick="checkAnswer('wrong', this)">Daniel Rabe</button>
+        <button class="answer-btn" onclick="checkAnswer('wrong', this)">Maxim</button>
+        <button class="answer-btn" onclick="checkAnswer('wrong', this)">Rapha</button>
+        <button class="answer-btn" onclick="checkAnswer('wrong', this)">Kleiner Sören</button>
         <div class="result" id="result"></div>
+        
+        <!-- Input section to show when the correct answer is clicked -->
+        <div class="input-section" id="inputSection">
+            <label for="message">Super! Bitte teile mir dein geheimen Wunsch mit:</label>
+            <input type="text" id="message" placeholder="Mein Wunsch ist...">
+            <button onclick="sendEmail()">Abschicken an Luki</button>
+            <div id="emailStatus"></div>
+        </div>
     </div>
 
     <script>
         function checkAnswer(answer, button) {
             const resultDiv = document.getElementById('result');
+            const inputSection = document.getElementById('inputSection');
+            
             if (answer === 'correct') {
-                resultDiv.innerHTML = "<span style='color:green;'>Richtig! Linus ist der Beste! Bitte sende deinen geheimen Wunsch and Luki</span>";
-                disableButtons();
+                resultDiv.innerHTML = "<span style='color:green;'>Richtig!! Linus ist der Beste!</span>";
+                disableAnswerButtons();
+                inputSection.style.display = 'block'; // Show input section
             } else {
                 resultDiv.innerHTML = "<span style='color:red;'>Falsch!</span>";
                 // Disable only the wrong button that was clicked
@@ -108,9 +158,26 @@
             }
         }
 
-        function disableButtons() {
-            const buttons = document.querySelectorAll('button');
+        function disableAnswerButtons() {
+            const buttons = document.querySelectorAll('.answer-btn');
             buttons.forEach(button => button.disabled = true);
+        }
+
+        function sendEmail() {
+            const message = document.getElementById('message').value;
+            const emailStatus = document.getElementById('emailStatus');
+
+            // Send the email using EmailJS
+            emailjs.send("service_y3x0r6t", "template_506rrfl", {
+                message: message
+            })
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                emailStatus.innerHTML = "<span style='color:green;'>Message sent successfully!</span>";
+            }, function(error) {
+                console.log('FAILED...', error);
+                emailStatus.innerHTML = "<span style='color:red;'>Failed to send the message. Please try again.</span>";
+            });
         }
     </script>
 </body>
