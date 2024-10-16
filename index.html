@@ -91,6 +91,7 @@
         <button onclick="checkAnswer('wrong', this)">Daniel Rabe</button>
         <button onclick="checkAnswer('wrong', this)">Marvin Sommer</button>
         <button onclick="checkAnswer('wrong', this)">Kleiner Sören</button>
+        <button onclick="checkAnswer('wrong', this)">Maxim</button>
         <div class="result" id="result"></div>
     </div>
 
@@ -98,7 +99,7 @@
         function checkAnswer(answer, button) {
             const resultDiv = document.getElementById('result');
             if (answer === 'correct') {
-                resultDiv.innerHTML = "<span style='color:green;'>Richtig! Linus ist der Beste!</span>";
+                resultDiv.innerHTML = "<span style='color:green;'>Richtig! Linus ist der Beste! Bitte sende Luki deinen Wunsch</span>";
                 disableButtons();
             } else {
                 resultDiv.innerHTML = "<span style='color:red;'>Falsch!</span>";
