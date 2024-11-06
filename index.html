@@ -115,6 +115,7 @@
         function flipCard() {
             card.classList.toggle('flipped');
             MathJax.typeset(); // Damit MathJax den neuen Inhalt rendert
+            checkSecretActivation();
         }
 
         const flashcards = [
@@ -135,7 +136,12 @@
             { question: "Wie multipliziert (*) man 2 Brüche?", answer: "Oben mal oben, unten mal unten" },
         ];
 
-        // Funktion, um die Reihenfolge der Fragen zufällig zu mischen
+        const secretFlashcard = {
+            question: "Geheime Frage: Wer ist der tollste, beste, talentierteste Mensch?", 
+            answer: "Linus &#128150;"
+        };
+
+        // Shuffle function to randomize flashcard order
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -144,19 +150,51 @@
         }
 
         shuffle(flashcards);
-
         let currentIndex = 0;
+        let flipCount = 0;
+        let secretActivated = false;
+        let flipTimeout;
 
         function showCard(index) {
-            document.getElementById('cardFront').innerHTML = "Frage: " + flashcards[index].question;
-            document.getElementById('cardBack').innerHTML = "" + flashcards[index].answer;
-            card.classList.remove('flipped');
-            MathJax.typeset(); // Neu rendern nach dem Wechseln der Karte
+            if (secretActivated && index === -1) {
+                // Show the secret flashcard
+                document.getElementById('cardFront').innerHTML = "Frage: " + secretFlashcard.question;
+                document.getElementById('cardBack').innerHTML = "Antwort: " + secretFlashcard.answer;
+            } else {
+                // Show regular flashcards
+                document.getElementById('cardFront').innerHTML = "Frage: " + flashcards[index].question;
+                document.getElementById('cardBack').innerHTML = "Antwort: " + flashcards[index].answer;
+            }
+            card.classList.remove('flipped'); // Reset to show the front of the card
+            MathJax.typeset(); // Re-render MathJax
         }
 
         function nextCard() {
-            currentIndex = (currentIndex + 1) % flashcards.length;
-            showCard(currentIndex);
+            if (secretActivated) {
+                // If currently showing the secret card, reset to normal cards
+                secretActivated = false;
+                currentIndex = (currentIndex + 1) % flashcards.length; // Move to the next normal card
+                showCard(currentIndex);
+            } else {
+                // Otherwise, show the next regular card
+                currentIndex = (currentIndex + 1) % flashcards.length;
+                showCard(currentIndex);
+            }
+        }
+
+        function checkSecretActivation() {
+            clearTimeout(flipTimeout); // Reset the timer if the button is pressed again within the limit
+            flipCount++;
+
+            if (flipCount >= 5) {
+                secretActivated = true;
+                showCard(-1); // Show the secret card
+                flipCount = 0; // Reset the counter
+            }
+
+            flipTimeout = setTimeout(() => {
+                flipCount = 0; // Reset count if 3 seconds pass without enough flips
+            }, 3000);
         }
 
         card.addEventListener('click', flipCard);
