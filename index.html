@@ -20,11 +20,13 @@
             width: 100%;
             max-width: 400px;
             perspective: 1000px;
+            margin: 0 auto; /* Center the card container */
+            padding: 0; /* Remove any padding that might shift it */
         }
 
         .card {
             position: relative;
-            width: 90%;
+            width: 100%;
             height: 250px;
             background-color: #fff;
             border-radius: 10px;
@@ -35,7 +37,6 @@
         }
 
         .card.flipped {
-            width: 90%;
             transform: rotateY(180deg);
         }
 
