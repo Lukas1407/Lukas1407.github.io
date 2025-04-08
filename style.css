@@ -15,16 +15,18 @@ html, body {
   color: #fff;
 }
 
-/* Fullscreen screen containers */
+/* Fullscreen screen containers with no extra padding that might cause overflow */
 .screen {
   width: 100%;
   height: 100%;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 10px;
+  /* Reduced padding to avoid content overflow */
+  padding: 0.5rem;
 }
 
 /* Utility class to hide elements */
@@ -34,12 +36,12 @@ html, body {
 
 /* Title Screen Styling */
 #titleScreen h1 {
-  font-size: 3rem;
-  margin-bottom: 20px;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
 }
 
 #startButton {
-  padding: 15px 30px;
+  padding: 1rem 2rem;
   font-size: 1.5rem;
   background: #444;
   color: #fff;
@@ -50,22 +52,22 @@ html, body {
 
 /* Configuration Screen Form */
 #configForm {
-  width: 100%;
+  width: 90%;
   max-width: 400px;
   display: flex;
   flex-direction: column;
 }
 
 #configForm label {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   text-align: left;
-  margin-top: 10px;
+  margin-top: 0.5rem;
 }
 
 #configForm input {
-  padding: 10px;
+  padding: 0.8rem;
   font-size: 1rem;
-  margin-top: 5px;
+  margin-top: 0.3rem;
   width: 100%;
   border: 1px solid #555;
   border-radius: 5px;
@@ -74,8 +76,8 @@ html, body {
 }
 
 #configForm button {
-  margin-top: 20px;
-  padding: 15px;
+  margin-top: 1.5rem;
+  padding: 1rem;
   font-size: 1.2rem;
   background: #444;
   color: #fff;
@@ -87,17 +89,18 @@ html, body {
 /* Error Message */
 #errorMessage {
   color: #ff6961;
-  margin-top: 10px;
+  margin-top: 0.5rem;
 }
 
 /* Game Screen styling */
 #gameScreen {
   cursor: pointer; /* Tapping anywhere advances the game */
+  overflow: hidden;
 }
 
 #roleDisplay {
-  font-size: 2.5rem;
-  padding: 20px;
+  font-size: 2rem;
+  padding: 1rem;
 }
 
 /* Settings Modal */
@@ -107,20 +110,21 @@ html, body {
   left: 50%;
   transform: translate(-50%, -50%);
   background: #444;
-  padding: 20px;
+  padding: 1rem;
   border: 1px solid #555;
   border-radius: 10px;
   z-index: 1000;
   width: 90%;
   max-width: 400px;
   text-align: left;
+  overflow: hidden;
 }
 
 /* Settings Icon in Bottom Left */
 .settings-icon {
   position: fixed;
-  bottom: 20px;
-  left: 20px;
+  bottom: 1rem;
+  left: 1rem;
   background: none;
   border: none;
   font-size: 2rem;
@@ -132,16 +136,16 @@ html, body {
 /* Settings Modal Form Elements */
 #settingsMenu label {
   display: block;
-  margin-top: 10px;
+  margin-top: 0.5rem;
 }
 
 #settingsMenu input,
 #settingsMenu select,
 #settingsMenu textarea {
   width: 100%;
-  padding: 10px;
+  padding: 0.8rem;
   font-size: 1rem;
-  margin-top: 5px;
+  margin-top: 0.3rem;
   border: 1px solid #555;
   border-radius: 5px;
   background: #2c2c2c;
@@ -150,10 +154,10 @@ html, body {
 
 /* Radio Button Option Styling: Inline Layout */
 .setting-option {
-  margin-top: 5px;
+  margin-top: 0.5rem;
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem; /* Reduced gap for a neater inline look */
+  gap: 0.3rem;
 }
 
 .setting-option input[type="radio"] {

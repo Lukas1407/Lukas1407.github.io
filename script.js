@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
       phase = "waiting";
       roleDisplay.innerHTML = `
         <div style="font-size: 2rem;">Player ${currentPlayerIndex + 1}</div>
-        <div style="margin-top: 20px; font-size: 1.5rem;">Tap anywhere to see your role</div>
+        <div style="margin-top: 1rem; font-size: 1.5rem;">Tap anywhere to see your role</div>
       `;
     }
   
@@ -136,14 +136,14 @@ document.addEventListener("DOMContentLoaded", () => {
       if (role === "agent") {
         roleDisplay.innerHTML = `
           <div style="font-size: 2.5rem;">Agent</div>
-          <div style="margin-top: 20px; font-size: 1.8rem;">Secret Word: ${secretWord}</div>
-          <div style="margin-top: 20px; font-size: 1rem;">Tap anywhere for next player</div>
+          <div style="margin-top: 1rem; font-size: 1.8rem;">Secret Word: ${secretWord}</div>
+          <div style="margin-top: 1rem; font-size: 1rem;">Tap anywhere for next player</div>
         `;
       } else {
         roleDisplay.innerHTML = `
           <div style="font-size: 2.5rem;">Spy</div>
-          <div style="margin-top: 20px; font-size: 1.8rem;">(No word)</div>
-          <div style="margin-top: 20px; font-size: 1rem;">Tap anywhere for next player</div>
+          <div style="margin-top: 1rem; font-size: 1.8rem;">(No word)</div>
+          <div style="margin-top: 1rem; font-size: 1rem;">Tap anywhere for next player</div>
         `;
       }
     }
