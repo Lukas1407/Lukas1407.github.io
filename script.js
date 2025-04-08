@@ -19,16 +19,15 @@ document.addEventListener("DOMContentLoaded", () => {
   
     // Predefined word lists
     const predefinedWordLists = {
-        orte: ["Schule", "Krankenhaus", "Flughafen", "Bahnhof", "Supermarkt", "Zoo", "Museum", "Restaurant", "Strand", "Bibliothek"],
-        tiere: ["Hund", "Katze", "Vogel", "Fisch", "Kuh", "Schwein", "Pferd", "Schaf", "Huhn", "Maus"],
-        berufe: ["Arzt", "Lehrer", "Bäcker", "Polizist", "Feuerwehrmann", "Mechaniker", "Koch", "Verkäufer", "Gärtner", "Friseur"],
-        essen: ["Brot", "Milch", "Käse", "Apfel", "Reis", "Nudeln", "Fleisch", "Wurst", "Ei", "Kartoffel"],
-        farben: ["Rot", "Blau", "Grün", "Gelb", "Schwarz", "Weiß", "Orange", "Lila", "Braun", "Grau"],
-        körperteile: ["Hand", "Fuß", "Kopf", "Arm", "Bein", "Auge", "Ohr", "Nase", "Mund", "Rücken"],
-        kleidung: ["Hose", "Hemd", "Jacke", "Schuhe", "Mütze", "Kleid", "Pullover", "Rock", "T-Shirt", "Schal"],
-        möbel: ["Stuhl", "Tisch", "Bett", "Schrank", "Sofa", "Lampe", "Regal", "Spiegel", "Teppich", "Kommode"],
-        wetter: ["Regen", "Sonne", "Wind", "Schnee", "Sturm", "Nebel", "Hitze", "Kälte", "Donner", "Blitz"],
-        verkehrsmittel: ["Auto", "Fahrrad", "Bus", "Zug", "Flugzeug", "Schiff", "Straßenbahn", "Motorrad", "Taxi", "Roller"]  
+      orte: ["Schule", "Krankenhaus", "Flughafen", "Bahnhof", "Supermarkt", "Zoo", "Museum", "Restaurant", "Strand", "Bibliothek"],
+      tiere: ["Hund", "Katze", "Vogel", "Fisch", "Kuh", "Schwein", "Pferd", "Schaf", "Huhn", "Maus"],
+      berufe: ["Arzt", "Lehrer", "Bäcker", "Polizist", "Feuerwehrmann", "Mechaniker", "Koch", "Verkäufer", "Gärtner", "Friseur"],
+      farben: ["Rot", "Blau", "Grün", "Gelb", "Schwarz", "Weiß", "Orange", "Lila", "Braun", "Grau"],
+      körperteile: ["Hand", "Fuß", "Kopf", "Arm", "Bein", "Auge", "Ohr", "Nase", "Mund", "Rücken"],
+      kleidung: ["Hose", "Hemd", "Jacke", "Schuhe", "Mütze", "Kleid", "Pullover", "Rock", "T-Shirt", "Schal"],
+      möbel: ["Stuhl", "Tisch", "Bett", "Schrank", "Sofa", "Lampe", "Regal", "Spiegel", "Teppich", "Kommode"],
+      wetter: ["Regen", "Sonne", "Wind", "Schnee", "Sturm", "Nebel", "Hitze", "Kälte", "Donner", "Blitz"],
+      verkehrsmittel: ["Auto", "Fahrrad", "Bus", "Zug", "Flugzeug", "Schiff", "Straßenbahn", "Motorrad", "Taxi", "Roller"]
     };
   
     // Game Variables
@@ -37,7 +36,13 @@ document.addEventListener("DOMContentLoaded", () => {
     let secretWord = "";
     let roles = []; // Array to store "agent" or "spy"
     let currentPlayerIndex = 0;
-    let phase = "waiting"; // Phases: "waiting", "reveal", "finished"
+    let phase = "waiting"; // Possible phases: "waiting", "reveal", "finished"
+  
+    // Load saved custom words from localStorage (if any)
+    const savedCustomWords = localStorage.getItem("customWordsList");
+    if (savedCustomWords !== null) {
+      customWordsArea.value = savedCustomWords;
+    }
   
     // Transition from Title Screen to Config Screen
     startButton.addEventListener("click", () => {
@@ -61,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Build the word list based on settings
       let wordList = [];
       if (predefinedRadio.checked) {
-        // Collect all checked topics
+        // Collect all checked topic checkboxes
         const topicCheckboxes = document.querySelectorAll('input[name="topics"]:checked');
         if (topicCheckboxes.length === 0) {
           errorMessage.textContent = "Please select at least one topic.";
@@ -81,9 +86,11 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
         wordList = customWords;
+        // Save the custom words so that the list persists in future sessions
+        localStorage.setItem("customWordsList", customWordsArea.value);
       }
   
-      // Randomly select a secret word from the chosen list
+      // Randomly select a secret word from the chosen word list
       secretWord = wordList[Math.floor(Math.random() * wordList.length)];
   
       // Generate roles and shuffle the array
@@ -126,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return shuffleArray(arr);
     }
   
-    // Fisher-Yates shuffle
+    // Fisher-Yates shuffle algorithm
     function shuffleArray(array) {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
