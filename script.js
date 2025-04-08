@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Screen Elements
+    // Bildschirm-Elemente
     const titleScreen = document.getElementById("titleScreen");
     const startButton = document.getElementById("startButton");
     const configScreen = document.getElementById("configScreen");
@@ -10,14 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const settingsMenu = document.getElementById("settingsMenu");
     const settingsIcon = document.getElementById("settingsIcon");
   
-    // Settings Modal Elements
+    // Elemente des Einstellungen-Modals
     const predefinedRadio = document.getElementById("predefinedRadio");
     const customRadio = document.getElementById("customRadio");
     const predefinedSection = document.getElementById("predefinedSection");
     const customSection = document.getElementById("customSection");
     const customWordsArea = document.getElementById("customWords");
   
-    // Predefined word lists
+    // Vordefinierte Wortlisten
     const predefinedWordLists = {
       orte: ["Schule", "Krankenhaus", "Flughafen", "Bahnhof", "Supermarkt", "Zoo", "Museum", "Restaurant", "Strand", "Bibliothek"],
       tiere: ["Hund", "Katze", "Vogel", "Fisch", "Kuh", "Schwein", "Pferd", "Schaf", "Huhn", "Maus"],
@@ -30,27 +30,27 @@ document.addEventListener("DOMContentLoaded", () => {
       verkehrsmittel: ["Auto", "Fahrrad", "Bus", "Zug", "Flugzeug", "Schiff", "Straßenbahn", "Motorrad", "Taxi", "Roller"]
     };
   
-    // Game Variables
+    // Spielvariablen
     let totalPlayers = 0;
     let numberOfSpies = 0;
     let secretWord = "";
-    let roles = []; // Array to store "agent" or "spy"
+    let roles = []; // Array zum Speichern von "agent" oder "spy"
     let currentPlayerIndex = 0;
-    let phase = "waiting"; // Possible phases: "waiting", "reveal", "finished"
+    let phase = "waiting"; // Mögliche Phasen: "waiting", "reveal", "finished"
   
-    // Load saved custom words from localStorage (if any)
+    // Eigene Wörter aus localStorage laden (falls vorhanden)
     const savedCustomWords = localStorage.getItem("customWordsList");
     if (savedCustomWords !== null) {
       customWordsArea.value = savedCustomWords;
     }
   
-    // Transition from Title Screen to Config Screen
+    // Wechsel vom Titelseite zum Konfigurationsbildschirm
     startButton.addEventListener("click", () => {
       titleScreen.classList.add("hidden");
       configScreen.classList.remove("hidden");
     });
   
-    // Handle configuration form submission to start the game
+    // Behandlung der Formularübermittlung des Konfigurationsbildschirms zum Spielstart
     configForm.addEventListener("submit", (e) => {
       e.preventDefault();
       errorMessage.textContent = "";
@@ -59,20 +59,20 @@ document.addEventListener("DOMContentLoaded", () => {
       numberOfSpies = parseInt(document.getElementById("numberOfSpies").value);
   
       if (numberOfSpies >= totalPlayers) {
-        errorMessage.textContent = "Number of spies must be less than total players.";
+        errorMessage.textContent = "Die Anzahl der Spione muss kleiner sein als die Gesamtzahl der Spieler.";
         return;
       }
   
-      // Build the word list based on settings
+      // Erstelle die Wortliste basierend auf den Einstellungen
       let wordList = [];
       if (predefinedRadio.checked) {
-        // Collect all checked topic checkboxes
+        // Alle ausgewählten Themen-Checkboxen sammeln
         const topicCheckboxes = document.querySelectorAll('input[name="topics"]:checked');
         if (topicCheckboxes.length === 0) {
-          errorMessage.textContent = "Please select at least one topic.";
+          errorMessage.textContent = "Bitte wähle mindestens ein Thema aus.";
           return;
         }
-        // Combine words from all selected predefined topics
+        // Wörter aus allen ausgewählten vordefinierten Themen kombinieren
         topicCheckboxes.forEach(chk => {
           const topic = chk.value;
           wordList = wordList.concat(predefinedWordLists[topic]);
@@ -82,29 +82,29 @@ document.addEventListener("DOMContentLoaded", () => {
           .map(word => word.trim())
           .filter(word => word);
         if (customWords.length === 0) {
-          errorMessage.textContent = "Please enter at least one custom word.";
+          errorMessage.textContent = "Bitte gib mindestens ein eigenes Wort ein.";
           return;
         }
         wordList = customWords;
-        // Save the custom words so that the list persists in future sessions
+        // Eigene Wörter speichern, damit sie in zukünftigen Sitzungen erhalten bleiben
         localStorage.setItem("customWordsList", customWordsArea.value);
       }
   
-      // Randomly select a secret word from the chosen word list
+      // Zufälliges Geheimwort aus der erstellten Wortliste auswählen
       secretWord = wordList[Math.floor(Math.random() * wordList.length)];
   
-      // Generate roles and shuffle the array
+      // Rollen generieren und das Array mischen
       roles = generateRoles(totalPlayers, numberOfSpies);
       currentPlayerIndex = 0;
       phase = "waiting";
   
-      // Switch screens: hide config, show game screen
+      // Bildschirme wechseln: Konfigurationsbildschirm ausblenden, Spielbildschirm anzeigen
       configScreen.classList.add("hidden");
       gameScreen.classList.remove("hidden");
       showWaitingState();
     });
   
-    // The entire game screen is clickable to advance the game
+    // Der gesamte Spielbildschirm reagiert auf Klick, um das Spiel fortzusetzen
     gameScreen.addEventListener("click", () => {
       if (phase === "waiting") {
         revealRole();
@@ -114,14 +114,14 @@ document.addEventListener("DOMContentLoaded", () => {
           showWaitingState();
         } else {
           phase = "finished";
-          roleDisplay.textContent = "All players have seen their roles. Enjoy your game!";
+          roleDisplay.textContent = "Alle Spieler haben ihre Rollen gesehen. Viel Spaß beim Spielen!";
         }
       } else if (phase === "finished") {
         location.reload();
       }
     });
   
-    // Generate a shuffled roles array
+    // Funktion zur Generierung eines gemischten Rollenarrays
     function generateRoles(total, spies) {
       let arr = [];
       for (let i = 0; i < spies; i++) {
@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return shuffleArray(arr);
     }
   
-    // Fisher-Yates shuffle algorithm
+    // Fisher-Yates-Mischalgorithmus
     function shuffleArray(array) {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -142,40 +142,40 @@ document.addEventListener("DOMContentLoaded", () => {
       return array;
     }
   
-    // Show waiting state for the current player's turn
+    // Den Wartezustand für den aktuellen Spieler anzeigen
     function showWaitingState() {
       phase = "waiting";
       roleDisplay.innerHTML = `
-        <div style="font-size: 2rem;">Player ${currentPlayerIndex + 1}</div>
-        <div style="margin-top: 1rem; font-size: 1.5rem;">Tap anywhere to see your role</div>
+        <div style="font-size: 2rem;">Spieler ${currentPlayerIndex + 1}</div>
+        <div style="margin-top: 1rem; font-size: 1.5rem;">Tippe irgendwo, um deine Rolle zu sehen</div>
       `;
     }
   
-    // Reveal the current player's role
+    // Die Rolle des aktuellen Spielers anzeigen
     function revealRole() {
       phase = "reveal";
       const role = roles[currentPlayerIndex];
       if (role === "agent") {
         roleDisplay.innerHTML = `
           <div style="font-size: 2.5rem;">Agent</div>
-          <div style="margin-top: 1rem; font-size: 1.8rem;">Secret Word: ${secretWord}</div>
-          <div style="margin-top: 1rem; font-size: 1rem;">Tap anywhere for next player</div>
+          <div style="margin-top: 1rem; font-size: 1.8rem;">Geheimwort: ${secretWord}</div>
+          <div style="margin-top: 1rem; font-size: 1rem;">Tippe irgendwo für den nächsten Spieler</div>
         `;
       } else {
         roleDisplay.innerHTML = `
-          <div style="font-size: 2.5rem;">Spy</div>
-          <div style="margin-top: 1rem; font-size: 1.8rem;">(No word)</div>
-          <div style="margin-top: 1rem; font-size: 1rem;">Tap anywhere for next player</div>
+          <div style="font-size: 2.5rem;">Spion</div>
+          <div style="margin-top: 1rem; font-size: 1.8rem;">(Kein Wort)</div>
+          <div style="margin-top: 1rem; font-size: 1rem;">Tippe irgendwo für den nächsten Spieler</div>
         `;
       }
     }
   
-    // Toggle the settings modal when the settings icon is clicked
+    // Schaltet das Einstellungen-Modal um, wenn auf das Einstellungen-Symbol geklickt wird
     settingsIcon.addEventListener("click", () => {
       settingsMenu.classList.toggle("hidden");
     });
   
-    // Toggle between predefined and custom word sections
+    // Umschalten zwischen den Abschnitten für vordefinierte Wörter und eigene Wörter
     predefinedRadio.addEventListener("change", () => {
       if (predefinedRadio.checked) {
         predefinedSection.classList.remove("hidden");
