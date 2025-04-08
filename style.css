@@ -1,0 +1,75 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+#container {
+  background: #fff;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+input, select, textarea {
+  padding: 5px;
+  margin: 10px 0;
+  width: 80%;
+  font-size: 16px;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+/* Settings Menu styling */
+#settingsMenu {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-align: left;
+  background: #f1f1f1;
+}
+
+/* Modified radio button option styling: inline layout */
+.setting-option {
+  margin-top: 5px;          
+  margin-right: 5em;          
+  display: inline-flex;      /* or just 'flex' if you prefer block-level */
+  align-items: center;       /* Vertically center */
+  justify-content: flex-start; /* Keep items to the left */
+  gap: 0.5rem;               /* Small horizontal gap between the radio button and its label */
+  text-align: left;          /* Helps if the parent is center-aligned */
+}
+
+.setting-option input[type="radio"] {
+  margin: 0;                 /* Remove any default margins */
+}
+
+/* Optional: make textarea and select elements full-width inside settings */
+#customWords,
+#predefinedList {
+  width: calc(100% - 10px);
+}
