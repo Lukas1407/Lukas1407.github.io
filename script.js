@@ -29,9 +29,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let totalPlayers = 0;
     let numberOfSpies = 0;
     let secretWord = "";
-    let roles = []; // Roles will be an array of "agent" or "spy"
+    let roles = []; // Array to store "agent" or "spy"
     let currentPlayerIndex = 0;
-    let phase = "waiting"; // Possible phases: "waiting", "reveal", "finished"
+    let phase = "waiting"; // Phases: "waiting", "reveal", "finished"
   
     // Transition from Title Screen to Config Screen
     startButton.addEventListener("click", () => {
@@ -43,16 +43,16 @@ document.addEventListener("DOMContentLoaded", () => {
     configForm.addEventListener("submit", (e) => {
       e.preventDefault();
       errorMessage.textContent = "";
-      
+  
       totalPlayers = parseInt(document.getElementById("totalPlayers").value);
       numberOfSpies = parseInt(document.getElementById("numberOfSpies").value);
-      
+  
       if (numberOfSpies >= totalPlayers) {
         errorMessage.textContent = "Number of spies must be less than total players.";
         return;
       }
-      
-      // Determine the word list based on settings selections
+  
+      // Choose the word list based on settings selections
       let wordList = [];
       if (predefinedRadio.checked) {
         const topic = predefinedListSelect.value;
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         wordList = customWords;
       }
-      
+  
       // Randomly select a secret word from the chosen list
       secretWord = wordList[Math.floor(Math.random() * wordList.length)];
   
@@ -75,8 +75,8 @@ document.addEventListener("DOMContentLoaded", () => {
       roles = generateRoles(totalPlayers, numberOfSpies);
       currentPlayerIndex = 0;
       phase = "waiting";
-      
-      // Switch screens: hide configuration, show game
+  
+      // Switch screens: hide config, show game screen
       configScreen.classList.add("hidden");
       gameScreen.classList.remove("hidden");
       showWaitingState();
@@ -95,7 +95,6 @@ document.addEventListener("DOMContentLoaded", () => {
           roleDisplay.textContent = "All players have seen their roles. Enjoy your game!";
         }
       } else if (phase === "finished") {
-        // Reload to restart the game
         location.reload();
       }
     });
@@ -112,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return shuffleArray(arr);
     }
   
-    // Fisher-Yates shuffle algorithm
+    // Fisher-Yates shuffle
     function shuffleArray(array) {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -130,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     }
   
-    // Reveal the role for the current player
+    // Reveal the current player's role
     function revealRole() {
       phase = "reveal";
       const role = roles[currentPlayerIndex];
@@ -154,13 +153,14 @@ document.addEventListener("DOMContentLoaded", () => {
       settingsMenu.classList.toggle("hidden");
     });
   
-    // Toggle between predefined and custom words in the settings modal
+    // Toggle between predefined and custom word sections
     predefinedRadio.addEventListener("change", () => {
       if (predefinedRadio.checked) {
         predefinedSection.classList.remove("hidden");
         customSection.classList.add("hidden");
       }
     });
+  
     customRadio.addEventListener("change", () => {
       if (customRadio.checked) {
         customSection.classList.remove("hidden");
