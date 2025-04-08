@@ -211,15 +211,33 @@ html, body {
   gap: 0.3rem;
 }
 
-/* Additional styling for topic checkboxes (similar to radio options) */
+/* Base styles for topic options */
 .topic-option {
-  margin-top: 0.5rem;
+  margin-top: 0.3rem;
   display: inline-flex;
   align-items: center;
+  gap: 0.1rem; /* smaller gap */
 }
 
 .topic-option input[type="checkbox"] {
-  width: auto;
-  padding: 0;
+  width: 1rem;  /* set a standard size */
+  height: 1rem;
   margin: 0;
+}
+
+/* Mobile adjustments for screens 480px or less */
+@media (max-width: 480px) {
+  .topic-option {
+    margin-top: 0.2rem;
+    gap: 0.05rem; /* further reduce gap if needed */
+  }
+  
+  .topic-option input[type="checkbox"] {
+    width: 0.8rem;
+    height: 0.8rem;
+    /* Optionally, you can also use transform scaling if desired:
+    transform: scale(0.8);
+    transform-origin: center;
+    */
+  }
 }
