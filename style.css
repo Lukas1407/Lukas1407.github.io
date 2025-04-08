@@ -61,7 +61,7 @@ html, body {
 }
 
 .settings-icon img {
-  width: 2rem;
+  width: 1em;
   height: auto;
   filter: invert(100%);
 }
