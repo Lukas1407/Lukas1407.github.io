@@ -61,9 +61,9 @@ html, body {
 }
 
 .settings-icon img {
-  width: 2rem;  /* Adjust size as needed */
+  width: 2rem;
   height: auto;
-  fill: white;
+  filter: invert(100%);
 }
 
 /* Media Query for smaller screens (adjust if needed) */
