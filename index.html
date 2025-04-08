@@ -2,15 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <!-- Added maximum-scale and user-scalable to help prevent zooming/scrolling -->
+  <!-- Viewport settings for mobile devices -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <!-- Google Font for a nice, modern look -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <title>Spies Game</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <!-- Title Screen -->
   <div id="titleScreen" class="screen">
-    <h1>Spies</h1>
+    <h2 class="title-text">AGENTS VS <span class="red-text">SPIES</span></h2>
+    <img src="title.png" alt="Game Title" class="title-image">
     <button id="startButton">Start</button>
   </div>
 

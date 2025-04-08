@@ -11,11 +11,11 @@ html, body {
   height: 100vh;
   overflow: hidden;
   background: #2c2c2c;
-  font-family: Arial, sans-serif;
+  font-family: 'Montserrat', Arial, sans-serif;
   color: #fff;
 }
 
-/* Fullscreen screen containers with no extra padding that might cause overflow */
+/* Fullscreen screen containers with minimal padding */
 .screen {
   width: 100%;
   height: 100%;
@@ -25,7 +25,6 @@ html, body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  /* Reduced padding to avoid content overflow */
   padding: 0.5rem;
 }
 
@@ -35,9 +34,23 @@ html, body {
 }
 
 /* Title Screen Styling */
-#titleScreen h1 {
-  font-size: 2.5rem;
+.title-text {
+  font-size: 3.8rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.red-text {
+  color: #ff0000; /* Bright red for "SPIES" */
+}
+
+.title-image {
+  max-width: 80%;
+  height: auto;
   margin-bottom: 1rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #startButton {
@@ -139,7 +152,6 @@ html, body {
   margin-top: 0.5rem;
 }
 
-/* This rule applies to inputs except radios, selects, and textareas */
 #settingsMenu input:not([type="radio"]),
 #settingsMenu select,
 #settingsMenu textarea {
@@ -153,13 +165,6 @@ html, body {
   color: #fff;
 }
 
-/* Radio button styling: let them have their natural size, with a small margin if needed */
-#settingsMenu input[type="radio"] {
-  width: auto;
-  padding: 0;
-  margin: 0;
-}
-
 /* Radio Button Option Styling: Inline Layout */
 .setting-option {
   margin-top: 0.5rem;
@@ -170,4 +175,5 @@ html, body {
 
 .setting-option input[type="radio"] {
   margin: 0;
+  width: auto; /* Let radio buttons keep their natural size */
 }
