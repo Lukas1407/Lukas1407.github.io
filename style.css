@@ -216,7 +216,6 @@ html, body {
   margin-top: 0.5rem;
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
 }
 
 .topic-option input[type="checkbox"] {
