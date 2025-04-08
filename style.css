@@ -222,7 +222,6 @@ html, body {
 .topic-option input[type="checkbox"] {
   transform: scale(0.7);        /* Adjust the scale as needed */
   vertical-align: middle;       /* Align with text */
-  margin-right: 0.3rem;         /* Minimal gap between checkbox and label */
 }
 
 /* Optional: Adjust the label font-size and spacing */
@@ -230,4 +229,5 @@ html, body {
   font-size: 0.9rem;            /* Smaller font size */
   vertical-align: middle;       /* Align with checkbox */
   display: inline;              /* Ensure label is inline with the checkbox */
+  text-align: center;
 }
