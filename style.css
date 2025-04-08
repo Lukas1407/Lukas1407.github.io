@@ -214,21 +214,20 @@ html, body {
 
 /* Base styles for topic options */
 .topic-option {
-  display: flex;             /* Keep label + checkbox on same line */
-  align-items: center;
-  justify-content: flex-start; /* Align them flush left */
-  margin: 0.3rem 0;
+  display: block;             /* Each option gets its own block-level container */
+  margin-bottom: 0.2rem;        /* Minimal vertical spacing */
 }
 
 /* Scale down the native checkbox size */
 .topic-option input[type="checkbox"] {
-  transform: scale(0.8);
-  margin: 0;
+  transform: scale(0.7);        /* Adjust the scale as needed */
+  vertical-align: middle;       /* Align with text */
+  margin-right: 0.3rem;         /* Minimal gap between checkbox and label */
 }
 
 /* Optional: Adjust the label font-size and spacing */
 .topic-option label {
-  margin-left: 0.3rem;
-  font-size: 0.9rem;
-  text-align: left;
+  font-size: 0.9rem;            /* Smaller font size */
+  vertical-align: middle;       /* Align with checkbox */
+  display: inline;              /* Ensure label is inline with the checkbox */
 }
