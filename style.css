@@ -60,6 +60,12 @@ html, body {
   margin-right: auto;
 }
 
+.settings-icon img {
+  width: 2rem;  /* Adjust size as needed */
+  height: auto;
+  fill: white;
+}
+
 /* Media Query for smaller screens (adjust if needed) */
 @media (max-width: 480px) {
   .title-image {
@@ -190,4 +196,26 @@ html, body {
 .setting-option input[type="radio"] {
   margin: 0;
   width: auto; /* Let radio buttons keep their natural size */
+}
+
+/* Modified radio button option styling: inline layout */
+.setting-option {
+  margin-top: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* Additional styling for topic checkboxes (similar to radio options) */
+.topic-option {
+  margin-top: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.topic-option input[type="checkbox"] {
+  width: auto;
+  padding: 0;
+  margin: 0;
 }

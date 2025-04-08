@@ -15,14 +15,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const customRadio = document.getElementById("customRadio");
     const predefinedSection = document.getElementById("predefinedSection");
     const customSection = document.getElementById("customSection");
-    const predefinedListSelect = document.getElementById("predefinedList");
     const customWordsArea = document.getElementById("customWords");
   
     // Predefined word lists
     const predefinedWordLists = {
-      default: ["ocean", "forest", "galaxy", "castle", "spaghetti", "candle", "robot", "pirate", "moon", "dragon"],
-      locations: ["Paris", "New York", "Tokyo", "London", "Dubai", "Rome", "Barcelona", "Sydney", "Cairo", "Amsterdam"],
-      funny: ["unicorn", "penguin", "ninja", "potato", "giraffe", "zombie", "monster", "dinosaur", "robot", "alien"]
+        orte: ["Schule", "Krankenhaus", "Flughafen", "Bahnhof", "Supermarkt", "Zoo", "Museum", "Restaurant", "Strand", "Bibliothek"],
+        tiere: ["Hund", "Katze", "Vogel", "Fisch", "Kuh", "Schwein", "Pferd", "Schaf", "Huhn", "Maus"],
+        berufe: ["Arzt", "Lehrer", "Bäcker", "Polizist", "Feuerwehrmann", "Mechaniker", "Koch", "Verkäufer", "Gärtner", "Friseur"],
+        essen: ["Brot", "Milch", "Käse", "Apfel", "Reis", "Nudeln", "Fleisch", "Wurst", "Ei", "Kartoffel"],
+        farben: ["Rot", "Blau", "Grün", "Gelb", "Schwarz", "Weiß", "Orange", "Lila", "Braun", "Grau"],
+        körperteile: ["Hand", "Fuß", "Kopf", "Arm", "Bein", "Auge", "Ohr", "Nase", "Mund", "Rücken"],
+        kleidung: ["Hose", "Hemd", "Jacke", "Schuhe", "Mütze", "Kleid", "Pullover", "Rock", "T-Shirt", "Schal"],
+        möbel: ["Stuhl", "Tisch", "Bett", "Schrank", "Sofa", "Lampe", "Regal", "Spiegel", "Teppich", "Kommode"],
+        wetter: ["Regen", "Sonne", "Wind", "Schnee", "Sturm", "Nebel", "Hitze", "Kälte", "Donner", "Blitz"],
+        verkehrsmittel: ["Auto", "Fahrrad", "Bus", "Zug", "Flugzeug", "Schiff", "Straßenbahn", "Motorrad", "Taxi", "Roller"]  
     };
   
     // Game Variables
@@ -52,11 +58,20 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
   
-      // Choose the word list based on settings selections
+      // Build the word list based on settings
       let wordList = [];
       if (predefinedRadio.checked) {
-        const topic = predefinedListSelect.value;
-        wordList = predefinedWordLists[topic];
+        // Collect all checked topics
+        const topicCheckboxes = document.querySelectorAll('input[name="topics"]:checked');
+        if (topicCheckboxes.length === 0) {
+          errorMessage.textContent = "Please select at least one topic.";
+          return;
+        }
+        // Combine words from all selected predefined topics
+        topicCheckboxes.forEach(chk => {
+          const topic = chk.value;
+          wordList = wordList.concat(predefinedWordLists[topic]);
+        });
       } else if (customRadio.checked) {
         let customWords = customWordsArea.value.split(",")
           .map(word => word.trim())

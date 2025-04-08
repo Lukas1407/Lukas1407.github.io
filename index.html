@@ -4,15 +4,16 @@
   <meta charset="UTF-8" />
   <!-- Viewport settings for mobile devices -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <!-- Google Font for a nice, modern look -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <title>Spies Game</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <!-- Title Screen -->
   <div id="titleScreen" class="screen">
-    <h2 class="title-text">AGENTS VS <span class="red-text">SPIES</span></h2>
+    <!-- Title Text above image -->
+    <h1 class="title-text">
+      AGENTS <span class="red-text">VS</span> SPIES
+    </h1>
     <img src="title_resized.png" alt="Game Title" class="title-image">
     <button id="startButton">Start</button>
   </div>
@@ -48,22 +49,60 @@
       <input type="radio" id="customRadio" name="wordSource" value="custom">
       <label for="customRadio">Custom Words</label>
     </div>
+
+    <!-- Predefined Topics Section: Multiple Checkboxes -->
     <div id="predefinedSection">
-      <label for="predefinedList">Choose a topic:</label>
-      <select id="predefinedList">
-        <option value="default">Default</option>
-        <option value="locations">Locations</option>
-        <option value="funny">Funny Topics</option>
-      </select>
+        <label>Select Topics:</label>
+        <div class="topic-option">
+        <input type="checkbox" id="topicOrte" name="topics" value="orte" checked>
+        <label for="topicOrte">Orte</label>
+        </div>
+        <div class="topic-option">
+        <input type="checkbox" id="topicTiere" name="topics" value="tiere">
+        <label for="topicTiere">Tiere</label>
+        </div>
+        <div class="topic-option">
+        <input type="checkbox" id="topicBerufe" name="topics" value="berufe">
+        <label for="topicBerufe">Berufe</label>
+        </div>
+        <div class="topic-option">
+        <input type="checkbox" id="topicFarben" name="topics" value="farben">
+        <label for="topicFarben">Farben</label>
+        </div>
+        <div class="topic-option">
+        <input type="checkbox" id="topicKörperteile" name="topics" value="körperteile">
+        <label for="topicKörperteile">Körperteile</label>
+        </div>
+        <div class="topic-option">
+        <input type="checkbox" id="topicKleidung" name="topics" value="kleidung">
+        <label for="topicKleidung">Kleidung</label>
+        </div>
+        <div class="topic-option">
+        <input type="checkbox" id="topicMöbel" name="topics" value="möbel">
+        <label for="topicMöbel">Möbel</label>
+        </div>
+        <div class="topic-option">
+        <input type="checkbox" id="topicVerkehrsmittel" name="topics" value="verkehrsmittel">
+        <label for="topicVerkehrsmittel">Verkehrsmittel</label>
+        </div>
+        <div class="topic-option">
+        <input type="checkbox" id="topicWetter" name="topics" value="wetter">
+        <label for="topicWetter">Wetter</label>
+        </div>
     </div>
+  
+
+    <!-- Custom Words Section -->
     <div id="customSection" class="hidden">
       <label for="customWords">Enter your own words (comma separated):</label>
       <textarea id="customWords" rows="3" placeholder="e.g., apple, banana, cherry"></textarea>
     </div>
   </div>
 
-  <!-- Settings Icon in the Bottom Left -->
-  <button id="settingsIcon" class="settings-icon">&#9881;</button>
+  <!-- Settings Icon in the Bottom Left (using an image) -->
+  <button id="settingsIcon" class="settings-icon">
+    <img src="settings.svg" alt="Settings" />
+  </button>
 
   <script src="script.js"></script>
 </body>
