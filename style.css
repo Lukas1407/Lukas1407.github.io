@@ -152,6 +152,14 @@ html, body {
   color: #fff;
 }
 
+#settingsMenu input[type="radio"] {
+  width: auto;
+  padding: 0;
+  margin-top: 0;
+  margin-right: 0.3rem; /* optional: adds a small gap between radio and label */
+  vertical-align: middle;
+}
+
 /* Radio Button Option Styling: Inline Layout */
 .setting-option {
   margin-top: 0.5rem;
