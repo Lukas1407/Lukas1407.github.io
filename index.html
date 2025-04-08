@@ -2,66 +2,65 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Spies Game</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="container">
-    <h1>Spies Game</h1>
-    
-    <!-- Settings Toggle Button -->
-    <button id="toggleSettings">Settings</button>
-    
-    <!-- Settings Menu (Hidden by default) -->
-    <div id="settingsMenu" class="hidden">
-      <h2>Settings</h2>
-      <p>Choose your word source:</p>
-      <div class="setting-option">
-        <input type="radio" id="predefinedRadio" name="wordSource" value="predefined" checked>
-        <label for="predefinedRadio">Predefined List</label>
-      </div>
-      <div class="setting-option">
-        <input type="radio" id="customRadio" name="wordSource" value="custom">
-        <label for="customRadio">Custom Words</label>
-      </div>
-      <div id="predefinedSection">
-        <label for="predefinedList">Choose a topic:</label>
-        <select id="predefinedList">
-          <option value="default">Default</option>
-          <option value="locations">Locations</option>
-          <option value="funny">Funny Topics</option>
-        </select>
-      </div>
-      <div id="customSection" class="hidden">
-        <label for="customWords">Enter your own words (comma separated):</label>
-        <textarea id="customWords" rows="3" placeholder="e.g., apple, banana, cherry"></textarea>
-      </div>
+  <!-- Title Screen -->
+  <div id="titleScreen" class="screen">
+    <h1>Spies</h1>
+    <button id="startButton">Start</button>
+  </div>
+
+  <!-- Configuration Screen -->
+  <div id="configScreen" class="screen hidden">
+    <form id="configForm">
+      <label for="totalPlayers">Total Players:</label>
+      <input type="number" id="totalPlayers" min="2" required />
+
+      <label for="numberOfSpies">Number of Spies:</label>
+      <input type="number" id="numberOfSpies" min="1" required />
+
+      <button type="submit">Begin Game</button>
+    </form>
+    <div id="errorMessage"></div>
+  </div>
+
+  <!-- Game Screen -->
+  <div id="gameScreen" class="screen hidden">
+    <div id="roleDisplay"></div>
+  </div>
+
+  <!-- Settings Modal (hidden by default) -->
+  <div id="settingsMenu" class="hidden">
+    <h2>Settings</h2>
+    <p>Choose your word source:</p>
+    <div class="setting-option">
+      <input type="radio" id="predefinedRadio" name="wordSource" value="predefined" checked>
+      <label for="predefinedRadio">Predefined List</label>
     </div>
-    
-    <!-- Game Configuration -->
-    <div id="gameConfig">
-      <p>Setup your game:</p>
-      <form id="configForm">
-        <label for="totalPlayers">Total Players:</label>
-        <input type="number" id="totalPlayers" min="2" required />
-
-        <label for="numberOfSpies">Number of Spies:</label>
-        <input type="number" id="numberOfSpies" min="1" required />
-
-        <p>The secret word for agents will be randomly chosen from your selected list.</p>
-
-        <button type="submit">Start Game</button>
-      </form>
-      <div id="errorMessage"></div>
+    <div class="setting-option">
+      <input type="radio" id="customRadio" name="wordSource" value="custom">
+      <label for="customRadio">Custom Words</label>
     </div>
-
-    <!-- Game Play Area -->
-    <div id="gameArea" class="hidden">
-      <div id="instructions"></div>
-      <button id="actionButton"></button>
+    <div id="predefinedSection">
+      <label for="predefinedList">Choose a topic:</label>
+      <select id="predefinedList">
+        <option value="default">Default</option>
+        <option value="locations">Locations</option>
+        <option value="funny">Funny Topics</option>
+      </select>
+    </div>
+    <div id="customSection" class="hidden">
+      <label for="customWords">Enter your own words (comma separated):</label>
+      <textarea id="customWords" rows="3" placeholder="e.g., apple, banana, cherry"></textarea>
     </div>
   </div>
+
+  <!-- Settings Icon -->
+  <button id="settingsIcon" class="settings-icon">&#9881;</button>
+
   <script src="script.js"></script>
 </body>
 </html>
