@@ -61,9 +61,14 @@ html, body {
 }
 
 .settings-icon img {
-  width: 1em;
+  width: 2rem;
   height: auto;
-  filter: invert(100%);
+  filter: brightness(0) invert(1); /* This makes a black image appear white */
+}
+@media (max-width: 480px) {
+  .settings-icon img {
+    width: 1.3rem; /* Even smaller on iPhone */
+  }
 }
 
 /* Media Query for smaller screens (adjust if needed) */
