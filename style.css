@@ -156,7 +156,6 @@ html, body {
   width: auto;
   padding: 0;
   margin-top: 0;
-  margin-right: 0.3rem; /* optional: adds a small gap between radio and label */
   vertical-align: middle;
 }
 
