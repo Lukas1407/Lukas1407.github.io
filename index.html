@@ -1,24 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <!-- Viewport settings for mobile devices -->
+  <!-- Für mobile Geräte: feste Viewport-Größe, kein Zoomen -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Spies Game</title>
+  <title>Agenten vs Spione</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Title Screen -->
+  <!-- Titelseite -->
   <div id="titleScreen" class="screen">
-    <!-- Title Text above image -->
     <h1 class="title-text">
-      AGENTS <span class="red-text">VS</span> SPIES
+      AGENTEN <span class="red-text">VS</span> SPIONE
     </h1>
-    <img src="title_resized.png" alt="Game Title" class="title-image">
+    <img src="title_resized.png" alt="Spiel Titel" class="title-image">
     <button id="startButton">Start</button>
   </div>
 
-  <!-- Configuration Screen -->
+  <!-- Konfigurationsbildschirm -->
   <div id="configScreen" class="screen hidden">
     <form id="configForm">
       <label for="totalPlayers">Anzahl der Spieler:</label>
@@ -32,76 +31,81 @@
     <div id="errorMessage"></div>
   </div>
 
-  <!-- Game Screen -->
+  <!-- Spielbildschirm -->
   <div id="gameScreen" class="screen hidden">
     <div id="roleDisplay"></div>
   </div>
 
-  <!-- Settings Modal (hidden by default) -->
+  <!-- Einstellungen Modal (anfangs versteckt) -->
   <div id="settingsMenu" class="hidden">
     <h2>Einstellungen</h2>
     <p>Wähle die Wortquelle:</p>
     <div class="setting-option">
       <input type="radio" id="predefinedRadio" name="wordSource" value="predefined" checked>
-      <label for="predefinedRadio">Vordefinierte Wörter</label>
+      <label for="predefinedRadio">Vordefinierte Liste</label>
     </div>
     <div class="setting-option">
       <input type="radio" id="customRadio" name="wordSource" value="custom">
       <label for="customRadio">Eigene Wörter</label>
     </div>
 
-    <!-- Predefined Topics Section: Multiple Checkboxes -->
+    <!-- Vordefinierte Themen (Mehrfachauswahl) -->
     <div id="predefinedSection">
-        <label>Select Topics:</label>
-        <div class="topic-option">
+      <label>Themen auswählen:</label>
+      <div class="topic-option">
         <input type="checkbox" id="topicOrte" name="topics" value="orte" checked>
         <label for="topicOrte">Orte</label>
-        </div>
-        <div class="topic-option">
+      </div>
+      <div class="topic-option">
         <input type="checkbox" id="topicTiere" name="topics" value="tiere">
         <label for="topicTiere">Tiere</label>
-        </div>
-        <div class="topic-option">
+      </div>
+      <div class="topic-option">
         <input type="checkbox" id="topicBerufe" name="topics" value="berufe">
         <label for="topicBerufe">Berufe</label>
-        </div>
-        <div class="topic-option">
+      </div>
+      <div class="topic-option">
         <input type="checkbox" id="topicFarben" name="topics" value="farben">
         <label for="topicFarben">Farben</label>
-        </div>
-        <div class="topic-option">
+      </div>
+      <div class="topic-option">
         <input type="checkbox" id="topicKörperteile" name="topics" value="körperteile">
         <label for="topicKörperteile">Körperteile</label>
-        </div>
-        <div class="topic-option">
+      </div>
+      <div class="topic-option">
         <input type="checkbox" id="topicKleidung" name="topics" value="kleidung">
         <label for="topicKleidung">Kleidung</label>
-        </div>
-        <div class="topic-option">
+      </div>
+      <div class="topic-option">
         <input type="checkbox" id="topicMöbel" name="topics" value="möbel">
         <label for="topicMöbel">Möbel</label>
-        </div>
-        <div class="topic-option">
+      </div>
+      <div class="topic-option">
         <input type="checkbox" id="topicVerkehrsmittel" name="topics" value="verkehrsmittel">
         <label for="topicVerkehrsmittel">Verkehrsmittel</label>
-        </div>
-        <div class="topic-option">
+      </div>
+      <div class="topic-option">
         <input type="checkbox" id="topicWetter" name="topics" value="wetter">
         <label for="topicWetter">Wetter</label>
-        </div>
+      </div>
     </div>
-  
 
-    <!-- Custom Words Section -->
+    <!-- Eigene Wörter -->
     <div id="customSection" class="hidden">
       <label for="customWords">Gib deine eigenen Wörter ein (kommagetrennt):</label>
-      <textarea id="customWords" rows="3" placeholder="z.B.: Apfel, Banane, Kirsche"></textarea>
+      <textarea id="customWords" rows="3" placeholder="z.B. Apfel, Banane, Kirsche"></textarea>
+    </div>
+
+    <!-- Countdown-Einstellung -->
+    <div id="countdownSection">
+      <label for="countdownTime">Countdown-Dauer (Minuten):</label>
+      <input type="number" id="countdownTime" value="10" min="1">
     </div>
   </div>
 
-  <!-- Settings Icon in the Bottom Left (using an image) -->
+  <!-- Einstellungen-Symbol in der unteren linken Ecke (als Bild) -->
   <button id="settingsIcon" class="settings-icon">
-    <img src="settings.svg" alt="Settings" />
+    <img src="settings.svg" alt="Einstellungen">
   </button>
 
   <script src="script.js"></script>

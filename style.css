@@ -78,7 +78,7 @@ html, body {
   }
 }
 
-#startButton {
+#startButton, #restartButton, #agentsWinButton{
   padding: 1rem 2rem;
   font-size: 1.5rem;
   background: #444;
@@ -230,4 +230,9 @@ html, body {
   vertical-align: middle;       /* Align with checkbox */
   display: inline;              /* Ensure label is inline with the checkbox */
   text-align: center;
+}
+
+/* Countdown-Einstellungen */
+#countdownSection {
+  margin-top: 0.5rem;
 }
