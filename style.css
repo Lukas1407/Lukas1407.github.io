@@ -207,7 +207,7 @@ html, body {
   color: #fff;
 }
 #settingsMenu input[type="radio"] {
-  margin-right: 0.5rem;
+  margin-right: 0.05rem;
 }
 
 /* Vordefinierte Themen: Checkbox-Optionen */
