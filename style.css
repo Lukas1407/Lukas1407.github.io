@@ -207,6 +207,7 @@ html, body {
 }
 #settingsMenu input[type="radio"] {
   margin-right: 0.05rem;
+  transform: scale(0.6);        /* Shrink the checkbox */
 }
 
 /* Vordefinierte Themen: Checkbox-Optionen */
@@ -225,6 +226,7 @@ html, body {
   padding: 0;
   transform: scale(0.6);        /* Shrink the checkbox */
   transform-origin: left center;
+  margin-right: -10rem;
 }
 
 .topic-option label {
