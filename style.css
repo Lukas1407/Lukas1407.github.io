@@ -218,7 +218,7 @@ html, body {
 }
 .topic-option input[type="checkbox"] {
   transform: scale(0.8);
-  margin-right: 0.5rem;
+  margin-right: 0.05rem;
 }
 .topic-option label {
   font-size: 0.95rem;
