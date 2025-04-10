@@ -193,7 +193,7 @@ html, body {
   display: block;
 }
 
-#settingsMenu input:not([type="radio"]),
+#settingsMenu input,
 #settingsMenu select,
 #settingsMenu textarea {
   width: 100%;
@@ -212,12 +212,16 @@ html, body {
 
 /* Vordefinierte Themen: Checkbox-Optionen */
 .topic-option {
-  display: inline;
+  display: flex;
   margin-bottom: 0.5rem;
 }
 .topic-option input[type="checkbox"] {
   transform: scale(0.8);
   margin-right: 0.05rem;
+}
+.topic-option label {
+  font-size: 0.95rem;
+  margin-left: -100rem;
 }
 
 /* Countdown-Einstellungen */
