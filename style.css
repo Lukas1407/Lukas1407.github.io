@@ -212,17 +212,22 @@ html, body {
 /* Vordefinierte Themen: Checkbox-Optionen */
 .topic-option {
   display: flex;
-  margin-bottom: 0.5rem;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 0.3rem; /* Small vertical spacing */
 }
+
 .topic-option input[type="checkbox"] {
   transform: scale(0.8);
-  margin-right: 0.05rem;
+  margin-right: 0.3rem;  /* Small gap to the label */
 }
+
 .topic-option label {
   font-size: 0.95rem;
-  margin-left: -12rem;
-  margin-bottom: -20.5rem;
+  margin: 0;           /* No extra margin */
+  white-space: nowrap; /* Prevent unwanted wrapping */
 }
+
 
 /* Countdown-Einstellungen */
 #countdownSection {
