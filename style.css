@@ -141,22 +141,36 @@ html, body {
   padding: 1rem;
 }
 
-/* Settings Modal */
+/* Einstellungen Modal */
 #settingsMenu {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: #444;
-  padding: 1rem;
+  padding: 1.5rem;
   border: 1px solid #555;
   border-radius: 10px;
   z-index: 1000;
   width: 90%;
-  max-width: 400px;
+  max-width: 450px;
   text-align: left;
-  overflow-y: auto;   /* Enables vertical scrolling */
-  max-height: 80vh;   /* Limits the container height so it fits most screens */
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+/* Überschrift im Einstellungen Modal */
+#settingsMenu h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.75rem;
+  border-bottom: 1px solid #666;
+  padding-bottom: 0.5rem;
+}
+
+/* Abschnittscontainer innerhalb des Einstellungen Modals */
+.settings-section {
+  margin-bottom: 1rem;
 }
 
 /* Settings Icon in Bottom Left */
@@ -172,10 +186,11 @@ html, body {
   cursor: pointer;
 }
 
-/* Settings Modal Form Elements */
+/* Allgemeine Elemente im Einstellungen Modal */
 #settingsMenu label {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
   display: block;
-  margin-top: 0.5rem;
 }
 
 #settingsMenu input:not([type="radio"]),
@@ -185,51 +200,28 @@ html, body {
   padding: 0.8rem;
   font-size: 1rem;
   margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
   border: 1px solid #555;
   border-radius: 5px;
   background: #2c2c2c;
   color: #fff;
 }
-
-/* Radio Button Option Styling: Inline Layout */
-.setting-option {
-  margin-top: 0.5rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
+#settingsMenu input[type="radio"] {
+  margin-right: 0.5rem;
 }
 
-.setting-option input[type="radio"] {
-  margin: 0;
-  width: auto; /* Let radio buttons keep their natural size */
-}
-
-/* Modified radio button option styling: inline layout */
-.setting-option {
-  margin-top: 0.5rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-}
-
-/* Base styles for topic options */
+/* Vordefinierte Themen: Checkbox-Optionen */
 .topic-option {
-  display: block;             /* Each option gets its own block-level container */
-  margin-bottom: 0.2rem;        /* Minimal vertical spacing */
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
 }
-
-/* Scale down the native checkbox size */
 .topic-option input[type="checkbox"] {
-  transform: scale(0.7);        /* Adjust the scale as needed */
-  vertical-align: middle;       /* Align with text */
+  transform: scale(0.8);
+  margin-right: 0.5rem;
 }
-
-/* Optional: Adjust the label font-size and spacing */
 .topic-option label {
-  font-size: 0.9rem;            /* Smaller font size */
-  vertical-align: middle;       /* Align with checkbox */
-  display: inline;              /* Ensure label is inline with the checkbox */
-  text-align: center;
+  font-size: 0.95rem;
 }
 
 /* Countdown-Einstellungen */

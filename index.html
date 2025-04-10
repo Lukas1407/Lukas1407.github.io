@@ -39,18 +39,22 @@
   <!-- Einstellungen Modal (anfangs versteckt) -->
   <div id="settingsMenu" class="hidden">
     <h2>Einstellungen</h2>
-    <p>Wähle die Wortquelle:</p>
-    <div class="setting-option">
-      <input type="radio" id="predefinedRadio" name="wordSource" value="predefined" checked>
-      <label for="predefinedRadio">Vordefinierte Liste</label>
-    </div>
-    <div class="setting-option">
-      <input type="radio" id="customRadio" name="wordSource" value="custom">
-      <label for="customRadio">Eigene Wörter</label>
+
+    <!-- Wortquelle-Optionen -->
+    <div class="settings-section">
+      <p>Wähle die Wortquelle:</p>
+      <div class="setting-option">
+        <input type="radio" id="predefinedRadio" name="wordSource" value="predefined" checked>
+        <label for="predefinedRadio">Vordefinierte Liste</label>
+      </div>
+      <div class="setting-option">
+        <input type="radio" id="customRadio" name="wordSource" value="custom">
+        <label for="customRadio">Eigene Wörter</label>
+      </div>
     </div>
 
     <!-- Vordefinierte Themen (Mehrfachauswahl) -->
-    <div id="predefinedSection">
+    <div id="predefinedSection" class="settings-section">
       <label>Themen auswählen:</label>
       <div class="topic-option">
         <input type="checkbox" id="topicOrte" name="topics" value="orte" checked>
@@ -91,13 +95,13 @@
     </div>
 
     <!-- Eigene Wörter -->
-    <div id="customSection" class="hidden">
+    <div id="customSection" class="settings-section hidden">
       <label for="customWords">Gib deine eigenen Wörter ein (kommagetrennt):</label>
       <textarea id="customWords" rows="3" placeholder="z.B. Apfel, Banane, Kirsche"></textarea>
     </div>
 
     <!-- Countdown-Einstellung -->
-    <div id="countdownSection">
+    <div id="countdownSection" class="settings-section">
       <label for="countdownTime">Countdown-Dauer (Minuten):</label>
       <input type="number" id="countdownTime" value="10" min="1">
     </div>

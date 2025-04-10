@@ -76,6 +76,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (savedCustomWords !== null) {
     customWordsArea.value = savedCustomWords;
   }
+  // Lade gespeicherte Countdown-Dauer aus localStorage (falls vorhanden)
+  const savedCountdown = localStorage.getItem("countdownTimeValue");
+  if (savedCountdown !== null) {
+    countdownInput.value = savedCountdown;
+  }
 
   // Wechsel von der Titelseite zum Konfigurationsbildschirm
   startButton.addEventListener("click", () => {
@@ -83,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     configScreen.classList.remove("hidden");
   });
 
-  // Behandlung der Formularübermittlung
+  // Behandlung der Übermittlung des Konfigurationsformulars
   configForm.addEventListener("submit", (e) => {
     e.preventDefault();
     errorMessage.textContent = "";
@@ -95,6 +100,9 @@ document.addEventListener("DOMContentLoaded", () => {
       errorMessage.textContent = "Die Anzahl der Spione muss kleiner sein als die Gesamtzahl der Spieler.";
       return;
     }
+
+    // Speichere die Countdown-Dauer in localStorage
+    localStorage.setItem("countdownTimeValue", countdownInput.value);
 
     // Erstelle die Wortliste basierend auf den Einstellungen
     let wordList = [];
@@ -152,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (phase === "countdown") {
       // Während des Countdowns werden Klicks ignoriert.
     } else if (phase === "finished") {
-      // In der Endphase passiert nichts; der Neustart erfolgt über andere Mechanismen.
+      // In der Endphase passiert nichts automatisch; der Neustart erfolgt über die Buttons.
     }
   });
 
@@ -220,7 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // Starte das Intervall zur Aktualisierung des Countdowns (jede Sekunde)
     countdownIntervalId = setInterval(updateCountdown, 1000);
-    updateCountdown(); // Sofort aktualisieren
+    updateCountdown(); // Sofortige Aktualisierung
   }
   
   // Aktualisiere den Countdown
@@ -241,22 +249,27 @@ document.addEventListener("DOMContentLoaded", () => {
       roleDisplay.innerHTML = `
         <div style="font-size: 2rem;">Zeit abgelaufen!</div>
         <div style="margin-top: 1rem; font-size: 1.8rem;">Spione gewinnen!</div>
+        <button id="restartButton" style="margin-top: 1rem; padding: 0.5rem 1rem;">Neues Spiel</button>
       `;
       alarmSound.play().catch((err) => console.error("Fehler beim Abspielen des Alarms:", err));
       releaseWakeLock();
       phase = "finished";
+      // Füge den Restart-Button Listener hinzu
+      document.getElementById("restartButton").addEventListener("click", () => {
+        location.reload();
+      });
     }
   }
   
-  // Funktion für den Fall, dass Agenten gewinnen (wenn auf den Button geklickt wird)
+  // Funktion, falls Agenten gewinnen (Button-Klick)
   function agentsWin() {
     clearInterval(countdownIntervalId);
     releaseWakeLock();
-    // Statt einen separaten Endbildschirm anzuzeigen, wird die Seite sofort neu geladen
+    phase = "finished";
     location.reload();
   }
   
-  // Schalte das Einstellungen-Modal um, wenn das Einstellungen-Symbol geklickt wird
+  // Schalte das Einstellungen-Modal um, wenn auf das Einstellungen-Symbol geklickt wird
   settingsIcon.addEventListener("click", () => {
     settingsMenu.classList.toggle("hidden");
   });
