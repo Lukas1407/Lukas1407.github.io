@@ -222,6 +222,7 @@ html, body {
 }
 .topic-option label {
   font-size: 0.95rem;
+  margin-left: -10rem;
 }
 
 /* Countdown-Einstellungen */
