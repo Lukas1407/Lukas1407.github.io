@@ -234,6 +234,7 @@ html, body {
   padding: 0;
   font-size: 1rem;         /* Adjust as desired */
   line-height: 1.2;
+  margin-left: -10rem;
   white-space: nowrap;     /* Keeps label text on a single line */
 }
 
