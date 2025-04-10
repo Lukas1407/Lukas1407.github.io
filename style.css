@@ -213,7 +213,6 @@ html, body {
 /* Vordefinierte Themen: Checkbox-Optionen */
 .topic-option {
   display: flex;
-  align-items: center;
   margin-bottom: 0.5rem;
 }
 .topic-option input[type="checkbox"] {
