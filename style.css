@@ -214,20 +214,26 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-bottom: 0.3rem; /* Small vertical spacing */
+  gap: 0.2rem;             /* Minimal horizontal gap */
+  margin-bottom: 0.3rem;   /* Small vertical spacing between lines */
 }
 
 .topic-option input[type="checkbox"] {
-  transform: scale(0.8);
-  margin-right: 0.3rem;  /* Small gap to the label */
+  -webkit-appearance: checkbox; /* Ensure the native checkbox style on iOS */
+  appearance: checkbox;
+  margin: 0;
+  padding: 0;
+  transform: scale(0.6);        /* Shrink the checkbox */
+  transform-origin: left center;
 }
 
 .topic-option label {
-  font-size: 0.95rem;
-  margin: 0;           /* No extra margin */
-  white-space: nowrap; /* Prevent unwanted wrapping */
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;         /* Adjust as desired */
+  line-height: 1.2;
+  white-space: nowrap;     /* Keeps label text on a single line */
 }
-
 
 /* Countdown-Einstellungen */
 #countdownSection {
