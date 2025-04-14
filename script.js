@@ -84,6 +84,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Wechsel von der Titelseite zum Konfigurationsbildschirm
   startButton.addEventListener("click", () => {
+    // Audio-Kontext freischalten, indem der Ton kurz abgespielt und sofort pausiert wird
+    alarmSound.play()
+      .then(() => {
+        alarmSound.pause();
+      })
+      .catch((err) => {
+        console.error("Audio-Kontext konnte nicht entsperrt werden:", err);
+      });
+    
+    // Jetzt den Bildschirm wechseln:
     titleScreen.classList.add("hidden");
     configScreen.classList.remove("hidden");
   });
