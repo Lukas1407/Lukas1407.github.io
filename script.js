@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Vordefinierte Wortlisten
   const predefinedWordLists = {
-    orte: ["Schule", "Krankenhaus", "Flughafen", "Bahnhof", "Supermarkt", "Zoo", "Museum", "Restaurant", "Strand", "Bibliothek"],
+    orte: ["Schule", "Krankenhaus", "Flughafen", "Bahnhof", "Supermarkt", "Zoo", "Museum", "Restaurant", "Strand", "Bibliothek", "Dönerbude", "Clubhaus", "New York", "Dobel", "Europapark", "Zirkus"],
     tiere: ["Hund", "Katze", "Vogel", "Fisch", "Kuh", "Schwein", "Pferd", "Schaf", "Huhn", "Maus"],
     berufe: ["Arzt", "Lehrer", "Bäcker", "Polizist", "Feuerwehrmann", "Mechaniker", "Koch", "Verkäufer", "Gärtner", "Friseur"],
     farben: ["Rot", "Blau", "Grün", "Gelb", "Schwarz", "Weiß", "Orange", "Lila", "Braun", "Grau"],
