@@ -1,117 +1,364 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <!-- Für mobile Geräte: feste Viewport-Größe, kein Zoomen -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Agenten vs Spione</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phils Adventskalender</title>
+  <style>
+    :root {
+      --pine: #0b3b2e;
+      --holly: #1e5b4d;
+      --berry: #c4252a;
+      --gold: #f6d26a;
+      --snow: #f6f8fb;
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+      --panel: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0));
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Playfair Display", "Trebuchet MS", "Palatino", serif;
+      background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.06), transparent 25%),
+                  radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.08), transparent 20%),
+                  linear-gradient(135deg, #0d1c18, #093329 60%, #0d1c18);
+      color: var(--snow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px 64px;
+      overflow-x: hidden;
+    }
+
+    .scene {
+      width: min(1200px, 100%);
+      position: relative;
+      padding: 32px;
+      border-radius: 24px;
+      background: linear-gradient(165deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .scene::before,
+    .scene::after {
+      content: "";
+      position: absolute;
+      inset: -40px;
+      background-image: radial-gradient(2px 2px at 40px 60px, rgba(255, 255, 255, 0.6), transparent),
+                        radial-gradient(2px 2px at 200px 140px, rgba(255, 255, 255, 0.4), transparent),
+                        radial-gradient(1.5px 1.5px at 80% 20%, rgba(255, 255, 255, 0.35), transparent),
+                        radial-gradient(1.5px 1.5px at 60% 80%, rgba(255, 255, 255, 0.35), transparent);
+      animation: snowfall 16s linear infinite;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .scene::after {
+      animation-duration: 24s;
+      animation-direction: reverse;
+      opacity: 0.25;
+    }
+
+    @keyframes snowfall {
+      from { transform: translateY(-20px); }
+      to { transform: translateY(40px); }
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw + 0.5rem, 3.6rem);
+      letter-spacing: 1px;
+      color: var(--gold);
+      text-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .subtitle {
+      margin: 8px 0 0;
+      color: rgba(246, 248, 251, 0.88);
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+    }
+
+    .garland {
+      width: 100%;
+      margin: 20px auto 10px;
+      height: 8px;
+      background: repeating-linear-gradient(
+        -45deg,
+        var(--berry),
+        var(--berry) 12px,
+        var(--gold) 12px,
+        var(--gold) 24px,
+        var(--holly) 24px,
+        var(--holly) 36px
+      );
+      border-radius: 999px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .door {
+      position: relative;
+      height: 160px;
+      background: linear-gradient(150deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.12));
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      overflow: hidden;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+      perspective: 1100px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      overflow: visible;
+    }
+
+    .door:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 26px rgba(0, 0, 0, 0.34);
+    }
+
+    .door:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 4px;
+    }
+
+    .door-panel {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, var(--holly), var(--pine));
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      transform-origin: left center;
+      transition: transform 0.9s cubic-bezier(0.17, 0.67, 0.26, 1.08);
+      display: grid;
+      place-items: center;
+      color: var(--snow);
+      font-size: 2.1rem;
+      font-weight: 700;
+      text-shadow: 0 6px 12px rgba(0, 0, 0, 0.35);
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.08);
+    }
+
+    .door-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--panel);
+      border-radius: 14px;
+    }
+
+    .bow {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 38px;
+      height: 24px;
+      background: var(--berry);
+      border-radius: 8px 8px 2px 8px;
+      box-shadow:
+        -18px 0 0 0 var(--berry),
+        0 6px 14px rgba(0, 0, 0, 0.3);
+      transform: rotate(6deg);
+    }
+
+    .bow::after {
+      content: "";
+      position: absolute;
+      inset: 8px 12px;
+      background: var(--gold);
+      border-radius: 4px;
+    }
+
+    .gift {
+      position: absolute;
+      inset: 0;
+      padding: 20px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(165deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0));
+      color: var(--snow);
+      font-size: 1rem;
+      line-height: 1.5;
+      opacity: 0;
+      transition: opacity 0.4s ease 0.15s;
+    }
+
+    .door.open .door-panel {
+      transform: rotateY(-118deg);
+      box-shadow: 0 12px 18px rgba(0, 0, 0, 0.4);
+    }
+
+    .door.open .gift {
+      opacity: 1;
+      animation: glow-in 700ms ease;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(12, 59, 46, 0.75);
+      color: var(--gold);
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.28);
+      margin: 6px 0 4px;
+      font-size: 0.95rem;
+      width: fit-content;
+    }
+
+    .snow-burst {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--c, var(--snow));
+      pointer-events: none;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.45));
+      animation: burst 900ms ease-out forwards;
+      animation-delay: var(--delay, 0ms);
+      transform: translate(-50%, -50%) scale(0.4);
+      opacity: 0;
+      z-index: 2;
+    }
+
+    .door::after {
+      content: "";
+      position: absolute;
+      inset: -6px;
+      border-radius: 18px;
+      background: radial-gradient(circle, rgba(246, 210, 106, 0.35), transparent 55%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      filter: blur(2px);
+    }
+
+    .door.open::after {
+      opacity: 1;
+    }
+
+    @keyframes burst {
+      0% {
+        transform: translate(-50%, -50%) scale(0.2);
+        opacity: 0.8;
+      }
+      60% {
+        transform: translate(calc(-50% + var(--tx, 0px)), calc(-50% + var(--ty, -40px))) scale(1.05) rotate(var(--rot, 0deg));
+        opacity: 1;
+      }
+      100% {
+        transform: translate(calc(-50% + var(--tx, 0px)), calc(-50% + var(--ty, 40px))) scale(0.5) rotate(var(--rot, 0deg));
+        opacity: 0;
+      }
+    }
+
+    @keyframes glow-in {
+      0% { text-shadow: 0 0 0 rgba(246, 210, 106, 0); }
+      50% { text-shadow: 0 4px 18px rgba(246, 210, 106, 0.35); }
+      100% { text-shadow: 0 6px 22px rgba(246, 210, 106, 0.4); }
+    }
+
+    @media (max-width: 700px) {
+      body { padding: 32px 16px 48px; }
+      .door { height: 140px; }
+      .door-panel { font-size: 1.8rem; }
+      .gift { font-size: 0.95rem; }
+    }
+  </style>
 </head>
 <body>
-  <!-- Titelseite -->
-  <div id="titleScreen" class="screen">
-    <h1 class="title-text">
-      AGENTS <span class="red-text">VS</span> SPIES
-    </h1>
-    <img src="title_resized.png" alt="Spiel Titel" class="title-image">
-    <button id="startButton">Start</button>
-  </div>
+  <main class="scene" aria-label="Phils Adventskalender">
+    <header>
+      <div class="tag">🎄 Für Phil gemacht</div>
+      <h1>Phils Adventskalender</h1>
+      <p class="subtitle">Öffne jeden Tag eine Tür und hol dir dein Geschenk. Frohe Weihnachten, bester Freund!</p>
+      <div class="garland" aria-hidden="true"></div>
+    </header>
 
-  <!-- Konfigurationsbildschirm -->
-  <div id="configScreen" class="screen hidden">
-    <form id="configForm">
-      <label for="totalPlayers">Anzahl der Spieler:</label>
-      <input type="number" id="totalPlayers" min="2" required />
+    <section class="calendar-grid" aria-label="Advent doors">
+      <!-- Doors will be populated by JavaScript -->
+    </section>
+  </main>
 
-      <label for="numberOfSpies">Anzahl der Spione:</label>
-      <input type="number" id="numberOfSpies" min="1" required />
+  <script>
+    const gifts = Array.from({ length: 24 }, () => "1 Stunde Zeit mit Lukkiii verbringen");
 
-      <button type="submit">Spiel beginnen</button>
-    </form>
-    <div id="errorMessage"></div>
-  </div>
+    const grid = document.querySelector(".calendar-grid");
 
-  <!-- Spielbildschirm -->
-  <div id="gameScreen" class="screen hidden">
-    <div id="roleDisplay"></div>
-  </div>
+    gifts.forEach((gift, index) => {
+      const door = document.createElement("button");
+      door.className = "door";
+      door.type = "button";
+      door.setAttribute("aria-pressed", "false");
+      door.setAttribute("aria-label", `Tür ${index + 1} öffnen`);
 
-  <!-- Einstellungen Modal (anfangs versteckt) -->
-  <div id="settingsMenu" class="hidden">
-    <h2>Einstellungen</h2>
+      const giftBox = document.createElement("div");
+      giftBox.className = "gift";
+      giftBox.textContent = gift;
 
-    <!-- Wortquelle-Optionen -->
-    <div class="settings-section">
-      <p>Wähle die Wortquelle:</p>
-      <div class="setting-option">
-        <input type="radio" id="predefinedRadio" name="wordSource" value="predefined" checked>
-        <label for="predefinedRadio">Vordefinierte Liste</label>
-      </div>
-      <div class="setting-option">
-        <input type="radio" id="customRadio" name="wordSource" value="custom">
-        <label for="customRadio">Eigene Wörter</label>
-      </div>
-    </div>
+      const panel = document.createElement("div");
+      panel.className = "door-panel";
+      panel.textContent = index + 1;
 
-    <!-- Vordefinierte Themen (Mehrfachauswahl) -->
-    <div id="predefinedSection" class="settings-section">
-      <label>Themen auswählen:</label>
-      <div class="topic-option">
-        <input type="checkbox" id="topicOrte" name="topics" value="orte" checked>
-        <label for="topicOrte">Orte</label>
-      </div>
-      <div class="topic-option">
-        <input type="checkbox" id="topicTiere" name="topics" value="tiere">
-        <label for="topicTiere">Tiere</label>
-      </div>
-      <div class="topic-option">
-        <input type="checkbox" id="topicBerufe" name="topics" value="berufe">
-        <label for="topicBerufe">Berufe</label>
-      </div>
-      <div class="topic-option">
-        <input type="checkbox" id="topicFarben" name="topics" value="farben">
-        <label for="topicFarben">Farben</label>
-      </div>
-      <div class="topic-option">
-        <input type="checkbox" id="topicKörperteile" name="topics" value="körperteile">
-        <label for="topicKörperteile">Körperteile</label>
-      </div>
-      <div class="topic-option">
-        <input type="checkbox" id="topicKleidung" name="topics" value="kleidung">
-        <label for="topicKleidung">Kleidung</label>
-      </div>
-      <div class="topic-option">
-        <input type="checkbox" id="topicMöbel" name="topics" value="möbel">
-        <label for="topicMöbel">Möbel</label>
-      </div>
-      <div class="topic-option">
-        <input type="checkbox" id="topicVerkehrsmittel" name="topics" value="verkehrsmittel">
-        <label for="topicVerkehrsmittel">Verkehrsmittel</label>
-      </div>
-      <div class="topic-option">
-        <input type="checkbox" id="topicWetter" name="topics" value="wetter">
-        <label for="topicWetter">Wetter</label>
-      </div>
-    </div>
+      const bow = document.createElement("div");
+      bow.className = "bow";
+      bow.setAttribute("aria-hidden", "true");
 
-    <!-- Eigene Wörter -->
-    <div id="customSection" class="settings-section hidden">
-      <label for="customWords">Gib deine eigenen Wörter ein (kommagetrennt):</label>
-      <textarea id="customWords" rows="3" placeholder="z.B. Apfel, Banane, Kirsche"></textarea>
-    </div>
+      panel.appendChild(bow);
+      door.appendChild(panel);
+      door.appendChild(giftBox);
+      grid.appendChild(door);
 
-    <!-- Countdown-Einstellung -->
-    <div id="countdownSection" class="settings-section">
-      <label for="countdownTime">Countdown-Dauer (Minuten):</label>
-      <input type="number" id="countdownTime" value="10" min="1">
-    </div>
-  </div>
+      door.addEventListener("click", () => {
+        if (door.classList.contains("open")) return;
+        door.classList.add("open");
+        door.setAttribute("aria-pressed", "true");
+        launchBurst(door);
+      });
+    });
 
-  <!-- Einstellungen-Symbol in der unteren linken Ecke (als Bild) -->
-  <button id="settingsIcon" class="settings-icon">
-    <img src="settings.svg" alt="Einstellungen">
-  </button>
-
-  <script src="script.js"></script>
+    function launchBurst(door) {
+      const colors = ["#f6d26a", "#c4252a", "#f6f8fb", "#1e5b4d"];
+      const total = 14;
+      for (let i = 0; i < total; i++) {
+        const flake = document.createElement("span");
+        flake.className = "snow-burst";
+        const angle = (Math.PI * 2 * i) / total + Math.random() * 0.6;
+        const distance = 40 + Math.random() * 45;
+        const tx = Math.cos(angle) * distance;
+        const ty = Math.sin(angle) * distance - 20;
+        flake.style.setProperty("--tx", `${tx}px`);
+        flake.style.setProperty("--ty", `${ty}px`);
+        flake.style.setProperty("--rot", `${Math.random() * 160 - 80}deg`);
+        flake.style.setProperty("--delay", `${Math.random() * 120}ms`);
+        flake.style.setProperty("--c", colors[i % colors.length]);
+        door.appendChild(flake);
+        setTimeout(() => flake.remove(), 1100);
+      }
+    }
+  </script>
 </body>
 </html>
